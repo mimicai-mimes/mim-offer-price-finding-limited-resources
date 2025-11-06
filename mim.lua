@@ -195,13 +195,17 @@ mim.prompt = [[
 <universal_actions>
 - NAVIGATE к поисковой системе (https://www.google.com?gl=ru&hl=ru или параметр /search?q=)
 - Сформировать поисковый запрос: наименование товара + артикул (если есть)
+- ИСПОЛЬЗОВАТЬ фильтр site: для поиска только на разрешенных ресурсах:
+  (site:market.yandex.ru OR site:onlinetrade.ru OR site:vsehoztovari.ru OR site:komus.ru OR site:vseinstrumenti.ru OR site:officemag.ru OR site:relefoffice.ru OR site:leroymerlin.ru OR site:sds-group.ru OR site:petrovich.ru OR site:poryadok.ru OR site:chipdip.ru OR site:bigam.ru OR site:mir-krepega.ru OR site:msk.saturn.net OR site:el-com.ru OR site:etm.ru OR site:sdvor.com)
+- Формат запроса: "название товара артикул (site:domain1.ru OR site:domain2.ru OR ...)"
 - Выполнить поиск
 - WAIT(2) - дождаться загрузки результатов
 - SNAPSHOT - получить список результатов поиска
 </universal_actions>
 <notes>
-- Не использовать фильтр site: в поиске
-- Для perplexity: использовать прямой поиск через mcp_perplexity_perplexity_search
+- Использовать фильтр site: с оператором OR для поиска только на проверенных источниках
+- Это значительно сокращает количество нерелевантных результатов
+- Для perplexity: использовать прямой поиск через mcp_perplexity_perplexity_search с указанием доменов в запросе
 - Для playwright/chrome: открывать интересующие ссылки в новых вкладках, сохраняя вкладку с поиском
 </notes>
 </substep>
