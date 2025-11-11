@@ -191,59 +191,39 @@ mim.prompt = [[
 4. el-com.ru - https://www.el-com.ru/catalog-search/?s=Поиск&q=ЗАПРОС
 5. etm.ru - https://www.etm.ru/catalog?searchValue=ЗАПРОС
 6. petrovich.ru - https://petrovich.ru/search/?q=ЗАПРОС
-7. leroymerlin.ru - https://lemanapro.ru/search/?suggest=true&q=ЗАПРОС
 8. sds-group.ru - https://www.sds-group.ru/search/?q=ЗАПРОС
 9. poryadok.ru - https://poryadok.ru/search/?q=ЗАПРОС
 10. bigam.ru - https://www.bigam.ru/?digiSearch=true&term=ЗАПРОС&params=%7Csort%3DDEFAULT
 11. mir-krepega.ru - https://mirkrepega.ru/?match=all&subcats=Y&pcode_from_q=Y&pshort=Y&pfull=Y&pname=Y&pkeywords=Y&search_performed=Y&q=ЗАПРОС&dispatch=products.search
 12. sdvor.com - https://sdvor.com/ekb/search?freeTextSearch=ЗАПРОС
-13. vsehoztovari.ru - https://www.vsehoztovari.ru/search/?q=ЗАПРОС
-14. kuvalda.ru - https://www.kuvalda.ru/catalog/search/?keyword=ЗАПРОС
+13. kuvalda.ru - https://www.kuvalda.ru/catalog/search/?keyword=ЗАПРОС
 
 ПРИОРИТЕТ 2 - ДОПОЛНИТЕЛЬНЫЕ (если недостаточно цен):
-15. onlinetrade.ru - https://www.onlinetrade.ru/sitesearch.html?query=ЗАПРОС
-16. officemag.ru - https://www.officemag.ru/search/?q=ЗАПРОС
-17. relefoffice.ru - https://www.relefoffice.ru/search/?q=ЗАПРОС
+14. onlinetrade.ru - https://www.onlinetrade.ru/sitesearch.html?query=ЗАПРОС
+15. officemag.ru - https://www.officemag.ru/search/?q=ЗАПРОС
+16. relefoffice.ru - https://www.relefoffice.ru/search/?q=ЗАПРОС
 
 ПРИОРИТЕТ 3 - ПРОБЛЕМНЫЕ (только если критически не хватает):
-18. market.yandex.ru - https://market.yandex.ru/search?text=ЗАПРОС (авто-пропуск при блокировке)
-19. ozon.ru - https://www.ozon.ru/search/?text=ЗАПРОС (авто-пропуск при блокировке)
-
-ИСКЛЮЧЕНО (не использовать):
-- business.yandex.ru (требует авторизацию)
-- msk.saturn.net (сложная навигация)
+17. market.yandex.ru - https://market.yandex.ru/search?text=ЗАПРОС (авто-пропуск при блокировке)
+18. ozon.ru - https://www.ozon.ru/search/?text=ЗАПРОС (авто-пропуск при блокировке)
 </approved_sources>
 
 <automatic_workflow>
-МНОГОУРОВНЕВАЯ АВТОМАТИЧЕСКАЯ СТРАТЕГИЯ (БЕЗ вопросов пользователю):
+АВТОМАТИЧЕСКАЯ СТРАТЕГИЯ ПРЯМОГО ПОИСКА (БЕЗ вопросов пользователю):
 
 УРОВЕНЬ 1 - ПРЯМОЙ ПОИСК ПО ПРИОРИТЕТУ 1:
 1. Последовательно проверять ВСЕ 14 источников приоритета 1
 2. Если найдено 3 цены → СТОП, сохранить, завершить
 3. Если найдено <3 цен после проверки всех 14 → УРОВЕНЬ 2
 
-УРОВЕНЬ 2 - GOOGLE-ПОИСК С ФИЛЬТРАЦИЕЙ:
-1. Сформировать Google-запрос: "[Название] [Артикул] site:vseinstrumenti.ru OR site:komus.ru OR site:chipdip.ru OR site:el-com.ru OR site:etm.ru OR site:petrovich.ru OR site:leroymerlin.ru OR site:sds-group.ru OR site:poryadok.ru OR site:bigam.ru OR site:mirkrepega.ru OR site:sdvor.com OR site:vsehoztovari.ru OR site:kuvalda.ru"
-2. NAVIGATE → https://www.google.com/search?q=[ЗАПРОС]
-3. SNAPSHOT → извлечь ссылки из утвержденных источников
-4. Для каждой ссылки: NAVIGATE → SNAPSHOT → проверка → сохранение
-5. Если найдено 3 цены → СТОП, сохранить, завершить
-6. Если найдено <3 цен → УРОВЕНЬ 3
-
-УРОВЕНЬ 3 - ПРИОРИТЕТ 2 (ДОПОЛНИТЕЛЬНЫЕ ИСТОЧНИКИ):
+УРОВЕНЬ 2 - ПРИОРИТЕТ 2 (ДОПОЛНИТЕЛЬНЫЕ ИСТОЧНИКИ):
 1. Проверить ВСЕ 3 источника приоритета 2
 2. Если найдено 3 цены → СТОП, сохранить, завершить
-3. Если найдено <3 цен → УРОВЕНЬ 4
+3. Если найдено <3 цен → УРОВЕНЬ 3
 
-УРОВЕНЬ 4 - ПРИОРИТЕТ 3 (ПРОБЛЕМНЫЕ ИСТОЧНИКИ):
+УРОВЕНЬ 3 - ПРИОРИТЕТ 3 (ПРОБЛЕМНЫЕ ИСТОЧНИКИ):
 1. Проверить ВСЕ 2 источника приоритета 3 (с авто-пропуском блокировок)
-2. Если найдено 3 цены → СТОП, сохранить, завершить
-3. Если найдено <3 цен → УРОВЕНЬ 5
-
-УРОВЕНЬ 5 - GOOGLE-ПОИСК ПРИОРИТЕТА 2+3:
-1. Повторить Google-поиск с добавлением site:onlinetrade.ru OR site:officemag.ru OR site:relefoffice.ru OR site:market.yandex.ru OR site:ozon.ru
-2. Проверить новые найденные ссылки
-3. Сохранить все найденные цены (даже если 1-2)
+2. Сохранить все найденные цены (даже если <3)
 
 ВАЖНО: 
 - Каждый уровень активируется АВТОМАТИЧЕСКИ без вопросов
@@ -255,7 +235,7 @@ mim.prompt = [[
 <description>Автоматический поиск - работает без вопросов к пользователю</description>
 <execution_mode>АВТОНОМНЫЙ - все решения принимаются автоматически</execution_mode>
 <universal_actions>
-ФОРМАТ РАБОТЫ: Многоуровневая стратегия поиска с автоматическим переключением между методами
+ФОРМАТ РАБОТЫ: Многоуровневая стратегия прямого поиска с автоматическим переключением между источниками
 
 - Сформировать запрос: название + артикул (если есть)
   
@@ -267,26 +247,13 @@ mim.prompt = [[
   * Если найдено 3 цены → сохранить и завершить
   * Если <3 цен → автоматический переход к УРОВНЮ 2
   
-  УРОВЕНЬ 2 - Google-поиск по приоритету 1:
-  * Сформировать Google-запрос с site: для всех 14 источников приоритета 1
-  * NAVIGATE → Google → SNAPSHOT → извлечь ссылки
-  * Проверить каждую найденную ссылку из утвержденных источников
+  УРОВЕНЬ 2 - Прямой перебор приоритета 2:
+  * Проверить все 3 источника приоритета 2 последовательно
   * Если найдено 3 цены → сохранить и завершить
   * Если <3 цен → автоматический переход к УРОВНЮ 3
   
-  УРОВЕНЬ 3 - Прямой перебор приоритета 2:
-  * Проверить все 3 источника приоритета 2 последовательно
-  * Если найдено 3 цены → сохранить и завершить
-  * Если <3 цен → автоматический переход к УРОВНЮ 4
-  
-  УРОВЕНЬ 4 - Прямой перебор приоритета 3:
+  УРОВЕНЬ 3 - Прямой перебор приоритета 3:
   * Проверить все 2 источника приоритета 3 (с авто-пропуском блокировок)
-  * Если найдено 3 цены → сохранить и завершить
-  * Если <3 цен → автоматический переход к УРОВНЮ 5
-  
-  УРОВЕНЬ 5 - Google-поиск по приоритету 2+3:
-  * Google-запрос с site: для источников приоритета 2 и 3
-  * Проверить найденные ссылки
   * Сохранить все найденные цены (даже если 1-2)
   
 - При неудаче на источнике - автоматический переход к СЛЕДУЮЩЕМУ источнику (НЕ останавливаться!)
@@ -295,8 +262,7 @@ mim.prompt = [[
 
 ВАЖНО: 
 - НЕ спрашивать пользователя что делать - работать автономно
-- НЕ останавливаться после 3 попыток - проходить ВСЕ 5 уровней пока не найдено 3 цены
-- Google-поиск помогает найти товары, которые пропущены при прямом переборе
+- НЕ останавливаться после 3 попыток - проходить ВСЕ 3 уровня пока не найдено 3 цены
 </universal_actions>
 <query_optimization>
 - Автоматическая оптимизация запроса под формат сайта
@@ -421,7 +387,7 @@ mim.prompt = [[
     "H": "2230",
     "I": "https://www.chipdip.ru/product/klemma-wago-221-615-5x6-0mm2-s-rychazhkom-up-15-sht-8006785557",
     "J": "2415",
-    "K": "https://korelektro.ru/catalog/izdeliya-dlya-elektromontazha/klemmy-i-zazhimy-soedinitelnye/stroitelno-montazhnye-klemmy/112993/",
+    "K": "https://korelektro.ru/catalog/izdeliya-dlya-eleктромонтazha/klemmy-i-zazhimy-soedinitelnye/stroitelno-montazhnye-klemmy/112993/",
     "L": "2220",
     "M": "https://220city.ru/product/400451"
   }
@@ -485,63 +451,6 @@ mim.prompt = [[
 - Переход к следующему источнику при проблемах
 </automatic_protection>
 </anti_blocking>
-
-<google_fallback>
-<activation_trigger>
-АВТОМАТИЧЕСКИ активируется на УРОВНЕ 2 и УРОВНЕ 5 стратегии поиска
-</activation_trigger>
-
-<google_search_implementation>
-УРОВЕНЬ 2 - GOOGLE ДЛЯ ПРИОРИТЕТА 1:
-1. Запрос: "[Название товара] [Артикул] " + фильтр по 14 источникам приоритета 1
-   Формат site: "site:vseinstrumenti.ru OR site:komus.ru OR site:chipdip.ru OR site:el-com.ru OR site:etm.ru OR site:petrovich.ru OR site:leroymerlin.ru OR site:sds-group.ru OR site:poryadok.ru OR site:bigam.ru OR site:mirkrepega.ru OR site:sdvor.com OR site:vsehoztovari.ru OR site:kuvalda.ru"
-
-2. Выполнение:
-   - NAVIGATE → https://www.google.com/search?q=[ЗАПРОС]
-   - SNAPSHOT → извлечь ссылки на товары из результатов Google
-   - Фильтр: оставить только ссылки из утвержденных источников
-   
-3. Проверка каждой ссылки:
-   - NAVIGATE → страница товара
-   - SNAPSHOT → извлечение цены и характеристик
-   - Валидация: проверка соответствия товара
-   - Сохранение цены если подходит
-   
-4. Продолжать пока не найдено 3 цены ИЛИ все результаты Google не проверены
-
-УРОВЕНЬ 5 - GOOGLE ДЛЯ ПРИОРИТЕТА 2+3:
-1. Запрос: "[Название товара] [Артикул] " + фильтр по 5 источникам приоритета 2+3
-   Формат site: "site:onlinetrade.ru OR site:officemag.ru OR site:relefoffice.ru OR site:market.yandex.ru OR site:ozon.ru"
-
-2. Аналогично уровню 2: NAVIGATE → SNAPSHOT → проверка → сохранение
-
-3. Сохранить все найденные цены (даже если итого 1-2)
-</google_search_implementation>
-
-<query_variations>
-АВТОМАТИЧЕСКИЕ ВАРИАЦИИ ЗАПРОСА (если Google не дал результатов):
-Для Google-поиска пробовать последовательно:
-1. Полный: "[Полное название] [Артикул]"
-2. Упрощенный: "[Категория товара] [Ключевые характеристики] [Артикул]"
-3. Без артикула: "[Название товара] [Бренд] [Характеристики]"
-4. Минимальный: "[Бренд] [Категория] [Главная характеристика]"
-
-Проверять вариации пока не найдено результатов в Google
-</query_variations>
-
-<flexible_matching>
-РАСШИРЕННАЯ ВАЛИДАЦИЯ (только если точного совпадения нет):
-Если товар с точным артикулом/брендом не найден в Google:
-- Искать товары с похожими характеристиками:
-  * Та же категория (например: рулетка геодезическая)
-  * Те же ключевые параметры (50м, 12.5мм, ПВХ)
-  * Похожая ценовая категория
-- НЕ сохранять аналоги - только информировать о находке
-- Продолжить поиск точного совпадения
-
-ВАЖНО: Приоритет ВСЕГДА на точном совпадении бренда и артикула
-</flexible_matching>
-</google_fallback>
 </exception_handling>
 
 <expected_result>
